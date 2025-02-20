@@ -8,16 +8,17 @@ import maplibregl, { FullscreenControl, GlobeControl, TerrainControl, GeolocateC
 import { layers, namedFlavor } from '@protomaps/basemaps'
 
 onMounted(() => {
+    const base = (() => location.pathname.includes('/OSM-Offline-Map-Vue-Demo/') ? '/OSM-Offline-Map-Vue-Demo/' : '/')()
     const map = new maplibregl.Map({
         container: 'map',
         style: {
             version: 8,
-            glyphs: location.origin + '/fonts/{fontstack}/{range}.pbf',
-            sprite: location.origin + '/sprites/v4/light',
+            glyphs: location.origin + base + 'fonts/{fontstack}/{range}.pbf',
+            sprite: location.origin + base + 'sprites/v4/light',
             sources: {
                 protomaps: {
                     type: 'vector',
-                    url: `pmtiles://${location.origin}/planet_z6.pmtiles`,
+                    url: `pmtiles://${location.origin}${base}planet_z6.pmtiles`,
                     attribution: '<a href="https://protomaps.com">Protomaps</a> © <a href="https://openstreetmap.org">OpenStreetMap</a>'
                 }
             },
